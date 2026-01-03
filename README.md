@@ -1,47 +1,97 @@
-# Design Patterns Project
+# E-Commerce Shopping System – Design Patterns Project
 
-This project demonstrates the implementation of various design patterns in Java.
+## Project Overview
+
+This project implements a **basic e-commerce shopping system in Java** that demonstrates how multiple design patterns can be used together within a **single, coherent application**.
+
+The system allows a user to:
+- Add products to a shopping cart
+- View cart contents, totals, and taxes
+- Checkout using different payment methods
+- Integrate external and legacy payment systems through adapters
+
+Rather than presenting isolated pattern demos, this project applies design patterns to **solve real problems within the same application**, following object-oriented design principles.
+
+---
 
 ## Team Members
-- *JohnTheGre*: Implemented Singleton Pattern and Adapter Pattern.
-- *Ifechukwu26*: Implemented Stratergy Pattern.
 
-## Design Patterns
+- **JohnTheGre**  
+  Implemented the **Singleton Pattern** and **Adapter Pattern**
 
-### Creational Patterns
-**Singleton Pattern**: Ensures only one instance of a class is created.
-   - **Implementation**: The Singleton class has a private constructor to prevent direct instantiation and a static `getInstance()` method that controls object creation. The single instance is stored as a private static variable that's created only when first requested (lazy initialization).
-   - **Usage**: Guarantees that only one instance of the Singleton class exists throughout the application's lifetime. All calls to `getInstance()` return the same object reference, ensuring shared state and preventing duplicate instances.
-   - **Example**: When `Singleton.getInstance()` is called multiple times, it returns the same instance each time. The first call creates the instance, and subsequent calls return the existing one. This is verified by comparing references: `singleton1 == singleton2` returns true.
-   - **Benefits**:
-     - Controlled access to a single instance
-     - Reduces memory footprint (only one object created)
-     - Useful for managing shared resources (database connections, configuration managers, logging)
-     - Provides a global point of access
-   - **Real-world analogy**: Like a country having only one president at a time - no matter how many times you ask "who's the president?", you get the same person.
+- **Ifechukwu26**  
+  Implemented the **Strategy Pattern**
 
-### Structural Patterns
- **Adapter Pattern**: Allows incompatible interfaces to work together.
-   - **Implementation**: The MediaAdapter converts the AdvancedMediaPlayer's interface (with separate `playMp4()` and `playVlc()` methods) into the MediaPlayer interface that the client expects (single `play()` method).
-   - **Usage**: Enables the AudioPlayer to play advanced media formats (MP4, VLC) without modifying its existing code. The adapter acts as a bridge between the incompatible interfaces.
-   - **Example**: When `audioPlayer.play("mp4", "video.mp4")` is called, the MediaAdapter translates this into `advancedPlayer.playMp4("video.mp4")`, making the two incompatible systems work together seamlessly.
-   - **Real-world analogy**: Like a power adapter that converts one plug type to another, the MediaAdapter converts one method signature to another.
+---
 
-### Behavioral Patterns
-  **Strategy Pattern**: Encapsulates interchangeable algorithms.
-   - **Implementation**: Different payment methods (CreditCardPayment, PayPalPayment, BitcoinPayment) implement the PaymentStrategy interface. Each strategy encapsulates a specific payment algorithm. The ShoppingCart class uses composition to hold a reference to a PaymentStrategy that can be changed at runtime.
-   - **Usage**: Allows the client (ShoppingCart) to switch between different payment algorithms dynamically without modifying the cart's code. This follows the Open/Closed Principle - the code is open for extension (add new payment methods) but closed for modification.
-   - **Example**: The shopping cart can process payments using different methods by simply calling `setPaymentStrategy()` with the desired payment type, then calling `checkout()`. For instance, switching from `CreditCardPayment` to `PayPalPayment` requires no changes to the ShoppingCart class.
-   - **Benefits**: 
-     - Eliminates conditional statements (no need for if/else chains to handle different payment types)
-     - Easy to add new payment methods without modifying existing code
-     - Each payment algorithm is encapsulated in its own class, making them easier to test and maintain
-   - **Real-world analogy**: Like choosing different transportation methods (car, bus, bike) to reach your destination - the goal is the same, but the strategy changes.
+## Design Pattern Usage in the Application
 
+### Singleton Pattern (Creational)
 
-## How to Run(sftw-master)
-1. Compile the Java files:
-   javac src/*.java -d out
-2. Run main java file:
-   java -cp out Main
+- **Class**: `StoreConfig`
+- **Role**: Singleton
+- **Purpose**:  
+  Ensures that only one instance of the store configuration exists across the entire application.  
+  This configuration provides shared data such as tax rate, currency, store name, loyalty points, and free shipping threshold.
 
+- **Usage in Application**:
+    - Accessed by `ShoppingCart` and other components
+    - Guarantees consistent configuration values throughout the checkout process
+
+---
+
+### Strategy Pattern (Behavioral)
+
+- **Strategy Interface**: `PaymentStrategy`
+- **Concrete Strategies**:
+    - `CreditCardPayment`
+    - `PayPalPayment`
+- **Context Class**: `ShoppingCart`
+
+- **Purpose**:  
+  Encapsulates different payment algorithms and allows the shopping cart to switch payment methods dynamically at runtime without modifying its code.
+
+- **Usage in Application**:
+    - The user selects a payment method at checkout
+    - The `ShoppingCart` delegates the payment process to the selected strategy
+    - New payment methods can be added without changing the cart logic
+
+---
+
+### Adapter Pattern (Structural)
+
+- **Adapters**:
+    - `ExternalPaymentAdapter`
+    - `BankTransferAdapter`
+- **Adaptees**:
+    - `ExternalPaymentService`
+    - `BankTransferAPI`
+- **Target Interface**: `PaymentStrategy`
+
+- **Purpose**:  
+  Allows incompatible external payment APIs to be used within the application by adapting them to the `PaymentStrategy` interface.
+
+- **Usage in Application**:
+    - External or legacy payment systems are integrated without modifying existing application code
+    - Demonstrates how third-party services can be reused safely and cleanly
+
+---
+
+## Application Flow
+
+1. The application initializes shared store configuration using the **Singleton Pattern**
+2. The user adds products to the shopping cart
+3. The cart calculates subtotal, tax, loyalty points, and shipping eligibility
+4. A payment method is selected using the **Strategy Pattern**
+5. If the payment method is external, the **Adapter Pattern** is used to process the payment
+6. The checkout completes and the cart is cleared
+
+---
+
+## How to Run
+
+1. Compile the project
+2. Run the main class:
+
+```bash
+java -cp out Main

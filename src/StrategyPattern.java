@@ -1,71 +1,55 @@
-public class StrategyPattern {
-    // Strategy Interface
-    interface PaymentStrategy {
-        void pay(int amount);
+/**
+ * Strategy Pattern - Strategy Interface
+ * Defines the contract for all payment methods
+ */
+interface PaymentStrategy {
+    void pay(int amount);
+}
+
+/**
+ * Concrete Strategy - Credit Card Payment
+ */
+class CreditCardPayment implements PaymentStrategy {
+    private String cardNumber;
+    private String cardholderName;
+
+    public CreditCardPayment(String cardNumber, String cardholderName) {
+        this.cardNumber = cardNumber;
+        this.cardholderName = cardholderName;
     }
 
-    // Concrete Strategy 1: Credit Card Payment
-    static class CreditCardPayment implements PaymentStrategy {
-        private String cardNumber;
-        private String name;
-
-        public CreditCardPayment(String cardNumber, String name) {
-            this.cardNumber = cardNumber;
-            this.name = name;
-        }
-
-        @Override
-        public void pay(int amount) {
-            System.out.println("Paid $" + amount + " using Credit Card.");
-            System.out.println("Card Number: " + cardNumber + " | Cardholder: " + name);
-        }
+    @Override
+    public void pay(int amount) {
+        System.out.println("Processing Credit Card payment...");
+        System.out.println("Amount: €" + amount);
+        System.out.println("Card: " + maskCardNumber(cardNumber));
+        System.out.println("Cardholder: " + cardholderName);
+        System.out.println("✓ Credit Card payment successful!\n");
     }
 
-    // Concrete Strategy 2: PayPal Payment
-    static class PayPalPayment implements PaymentStrategy {
-        private String email;
-
-        public PayPalPayment(String email) {
-            this.email = email;
+    private String maskCardNumber(String card) {
+        if (card.length() > 4) {
+            return "****-" + card.substring(card.length() - 4);
         }
+        return card;
+    }
+}
 
-        @Override
-        public void pay(int amount) {
-            System.out.println("Paid $" + amount + " using PayPal.");
-            System.out.println("PayPal Email: " + email);
-        }
+/**
+ * Concrete Strategy - PayPal Payment
+ */
+class PayPalPayment implements PaymentStrategy {
+    private String email;
+
+    public PayPalPayment(String email) {
+        this.email = email;
     }
 
-    // Concrete Strategy 3: Bitcoin Payment
-    static class BitcoinPayment implements PaymentStrategy {
-        private String walletAddress;
-
-        public BitcoinPayment(String walletAddress) {
-            this.walletAddress = walletAddress;
-        }
-
-        @Override
-        public void pay(int amount) {
-            System.out.println("Paid $" + amount + " using Bitcoin.");
-            System.out.println("Wallet Address: " + walletAddress);
-        }
-    }
-
-    // Context Class: Shopping Cart
-    static class ShoppingCart {
-        private PaymentStrategy paymentStrategy;
-
-        // Set payment strategy at runtime
-        public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
-            this.paymentStrategy = paymentStrategy;
-        }
-
-        public void checkout(int amount) {
-            if (paymentStrategy == null) {
-                System.out.println("Please select a payment method!");
-                return;
-            }
-            paymentStrategy.pay(amount);
-        }
+    @Override
+    public void pay(int amount) {
+        System.out.println("Processing PayPal payment...");
+        System.out.println("Amount: €" + amount);
+        System.out.println("PayPal Email: " + email);
+        System.out.println("✓ PayPal payment successful!\n");
     }
 }
