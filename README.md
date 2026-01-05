@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project implements a **basic e-commerce shopping system in Java** that demonstrates how multiple design patterns can be used together within a **single, coherent application**.
+This project implements a **basic e-commerce shopping system in Java** that demonstrates how multiple design patterns can be used together within an in all **single, coherent application**.
 
 The system allows a user to:
 - Add products to a shopping cart
@@ -17,10 +17,10 @@ Rather than presenting isolated pattern demos, this project applies design patte
 ## Team Members
 
 - **JohnTheGre**  
-  Implemented the **Singleton Pattern** and **Adapter Pattern**
+  Implemented the **Singleton Pattern** and **Strategy Pattern**
 
 - **Ifechukwu26**  
-  Implemented the **Strategy Pattern**
+  Implemented the **Adapter Pattern**
 
 ---
 
@@ -53,7 +53,7 @@ Rather than presenting isolated pattern demos, this project applies design patte
 
 - **Usage in Application**:
     - The user selects a payment method at checkout
-    - The `ShoppingCart` delegates the payment process to the selected strategy
+    - The `ShoppingCart` gives the payment process to the selected strategy
     - New payment methods can be added without changing the cart logic
 
 ---
@@ -72,7 +72,7 @@ Rather than presenting isolated pattern demos, this project applies design patte
   Allows incompatible external payment APIs to be used within the application by adapting them to the `PaymentStrategy` interface.
 
 - **Usage in Application**:
-    - External or legacy payment systems are integrated without modifying existing application code
+    - External payment systems are integrated without modifying existing application code
     - Demonstrates how third-party services can be reused safely and cleanly
 
 ---

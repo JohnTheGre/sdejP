@@ -1,6 +1,6 @@
 /**
  * Adaptee - External Third-Party Payment Service
- * This represents an external API with a different interface
+ * This represents an external API
  */
 class ExternalPaymentService {
     public void processTransaction(double amount, String merchantId) {
@@ -66,9 +66,7 @@ class BankTransferAdapter implements PaymentStrategy {
     }
 }
 
-// ============================================
 // SHOPPING CART
-// ============================================
 
 /**
  * Context class that uses the Strategy Pattern
@@ -94,7 +92,7 @@ class ShoppingCart {
     }
 
     public void viewCart() {
-        System.out.println("\n=== Shopping Cart ===");
+        System.out.println("\n--- Shopping Cart ---");
         if (items.isEmpty()) {
             System.out.println("Cart is empty");
             return;
@@ -132,7 +130,7 @@ class ShoppingCart {
             return;
         }
 
-        System.out.println("\n========== CHECKOUT ==========");
+        System.out.println("\n---------- CHECKOUT ---------- ");
 
         // Calculate total using Singleton config
         int subtotal = 0;
@@ -154,7 +152,7 @@ class ShoppingCart {
         // Clear cart after successful checkout
         items.clear();
         System.out.println("✓ Order completed! Cart cleared.");
-        System.out.println("==============================\n");
+        System.out.println("--------------------------------\n");
     }
 
     // Inner class for cart items
