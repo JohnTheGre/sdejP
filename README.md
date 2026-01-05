@@ -22,6 +22,8 @@ Rather than presenting isolated pattern demos, this project applies design patte
 - **Ifechukwu26**  
   Implemented the **Adapter Pattern**
 
+## GITHUB
+- https://github.com/JohnTheGre/sdejP.git
 ---
 
 ## Design Pattern Usage in the Application
