@@ -50,7 +50,7 @@ class StoreConfig {
     }
 
     public void displayConfig() {
-        System.out.println("=== Store Configuration ===");
+        System.out.println(" Store Configuration ");
         System.out.println("Store Name: " + storeName);
         System.out.println("Currency: " + currency);
         System.out.println("Tax Rate: " + (taxRate * 100) + "%");

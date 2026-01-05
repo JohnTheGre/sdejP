@@ -41,7 +41,7 @@ class ExternalPaymentAdapter implements PaymentStrategy {
         double amountInEuros = (double) amount;
         System.out.println("Using External Payment Service (via Adapter)...");
         externalService.processTransaction(amountInEuros, merchantId);
-        System.out.println("✓ External payment completed!\n");
+        System.out.println(" External payment completed!\n");
     }
 }
 
@@ -121,12 +121,12 @@ class ShoppingCart {
 
     public void checkout() {
         if (items.isEmpty()) {
-            System.out.println("❌ Cannot checkout - cart is empty!\n");
+            System.out.println(" Cannot checkout - cart is empty!\n");
             return;
         }
 
         if (paymentStrategy == null) {
-            System.out.println("❌ Please select a payment method!\n");
+            System.out.println(" Please select a payment method!\n");
             return;
         }
 
@@ -151,7 +151,7 @@ class ShoppingCart {
 
         // Clear cart after successful checkout
         items.clear();
-        System.out.println("✓ Order completed! Cart cleared.");
+        System.out.println(" Order completed! Cart cleared.");
         System.out.println("--------------------------------\n");
     }
 

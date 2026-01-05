@@ -24,7 +24,7 @@ class CreditCardPayment implements PaymentStrategy {
         System.out.println("Amount: €" + amount);
         System.out.println("Card: " + maskCardNumber(cardNumber));
         System.out.println("Cardholder: " + cardholderName);
-        System.out.println("✓ Credit Card payment successful!\n");
+        System.out.println(" Credit Card payment successful!\n");
     }
 
     private String maskCardNumber(String card) {
@@ -50,6 +50,6 @@ class PayPalPayment implements PaymentStrategy {
         System.out.println("Processing PayPal payment...");
         System.out.println("Amount: €" + amount);
         System.out.println("PayPal Email: " + email);
-        System.out.println("✓ PayPal payment successful!\n");
+        System.out.println(" PayPal payment successful!\n");
     }
 }

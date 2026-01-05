@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("E-Commerce System with Design Patterns");
 
-        // ===== SINGLETON PATTERN =====
+        // SINGLETON PATTERN
         // Get store configuration (only one instance exists)
         StoreConfig config = StoreConfig.getInstance();
         config.displayConfig();
@@ -12,9 +12,9 @@ public class Main {
         System.out.println("→ Singleton verification: config == config2? " + (config == config2));
         System.out.println("  (Both variables point to the same instance)\n");
 
-        System.out.println("═══════════════════════════════════════\n");
+        System.out.println("--------\n");
 
-        // ===== ORDER 1: Credit Card Payment (Strategy Pattern) =====
+        // ORDER 1: Credit Card Payment (Strategy Pattern)
         System.out.println(">>> CUSTOMER 1: Shopping with Credit Card\n");
 
         ShoppingCart cart1 = new ShoppingCart();
@@ -29,9 +29,9 @@ public class Main {
         cart1.setPaymentStrategy(new CreditCardPayment("1234-5678-9012-3456", "John Doe"));
         cart1.checkout();
 
-        System.out.println("═══════════════════════════════════════\n");
+        System.out.println("--------\n");
 
-        // ===== ORDER 2: PayPal Payment (Strategy Pattern) =====
+        // ORDER 2: PayPal Payment (Strategy Pattern)
         System.out.println(">>> CUSTOMER 2: Shopping with PayPal\n");
 
         ShoppingCart cart2 = new ShoppingCart();
@@ -45,9 +45,9 @@ public class Main {
         cart2.setPaymentStrategy(new PayPalPayment("customer@email.com"));
         cart2.checkout();
 
-        System.out.println("═══════════════════════════════════════\n");
+        System.out.println("---------\n");
 
-        // ===== ORDER 3: External Payment Gateway (Adapter Pattern) =====
+        // ORDER 3: External Payment Gateway (Adapter Pattern)
         System.out.println(">>> CUSTOMER 3: Using External Payment Gateway\n");
 
         ShoppingCart cart3 = new ShoppingCart();
@@ -63,9 +63,9 @@ public class Main {
         cart3.setPaymentStrategy(new ExternalPaymentAdapter(externalService, "MERCH_12345"));
         cart3.checkout();
 
-        System.out.println("═══════════════════════════════════════\n");
+        System.out.println("-------\n");
 
-        // ===== ORDER 4: Bank Transfer (Adapter Pattern) =====
+        // ORDER 4: Bank Transfer (Adapter Pattern)
         System.out.println(">>> CUSTOMER 4: Using Bank Transfer\n");
 
         ShoppingCart cart4 = new ShoppingCart();
@@ -80,15 +80,15 @@ public class Main {
         cart4.setPaymentStrategy(new BankTransferAdapter(bankAPI, "NL91ABNA0417164300"));
         cart4.checkout();
 
-        System.out.println("═══════════════════════════════════════\n");
+        System.out.println("--------\n");
 
-        // ===== DEMONSTRATE PATTERN INTEGRATION =====
+        // PATTERN INTEGRATION
         System.out.println(">>> PATTERN SUMMARY:\n");
-        System.out.println("✓ SINGLETON: StoreConfig used by all carts for tax, currency, etc.");
-        System.out.println("✓ STRATEGY: Different payment methods (CreditCard, PayPal) interchangeable");
-        System.out.println("✓ ADAPTER: External services (Payment Gateway, Bank) adapted to our interface");
+        System.out.println(" THE SINGLETON: StoreConfig used by all carts for tax, currency, etc.");
+        System.out.println(" THE STRATEGY: Different payment methods (CreditCard, PayPal) interchangeable");
+        System.out.println(" THE ADAPTER: External services (Payment Gateway, Bank) adapted to our interface");
         System.out.println("\nAll patterns work together in one cohesive E-Commerce system!");
 
-        System.out.println(" Thank you for shopping with us!   ");
+        System.out.println(" Bedankt voor winkelen met onze winkel  ");
     }
 }
